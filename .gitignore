@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.log
+food_ordering_backend/node_modules/
+todo_backend/node_modules/
+flutter_todo_app_with_jwt/node_modules/

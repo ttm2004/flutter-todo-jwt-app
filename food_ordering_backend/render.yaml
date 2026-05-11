@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: food-ordering-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://flutter-todo-jwt-app:kkk111@cluster0.sps96rn.mongodb.net/food_ordering_db?appName=Cluster0
+      - key: JWT_SECRET
+        value: food_ordering_jwt_super_secret_key_2024
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: NODE_ENV
+        value: production
