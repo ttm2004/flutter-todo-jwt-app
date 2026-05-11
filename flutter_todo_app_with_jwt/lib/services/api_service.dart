@@ -45,7 +45,7 @@ class ApiService {
   Future<T> _withTimeout<T>(Future<T> Function() fn) async {
     try {
       return await fn().timeout(
-        const Duration(seconds: 30),
+        const Duration(seconds: 60),
         onTimeout: () => throw ApiException('Yêu cầu hết thời gian chờ. Vui lòng thử lại.'),
       );
     } on TimeoutException {
