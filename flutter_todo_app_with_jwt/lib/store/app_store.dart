@@ -271,12 +271,49 @@ class AppStore extends ChangeNotifier {
     try {
       final api = ApiService(token: _userLogin!.token);
       final data = await api.createOrder();
-      // Server đã clear cart, cập nhật local
       _gioHang = CartModel(id: '', items: [], totalAmount: 0);
       notifyListeners();
       return data;
     } on ApiException {
       rethrow;
+    }
+  }
+
+  Future<List<dynamic>> fetchOrders() async {
+    if (_userLogin == null) return [];
+    try {
+      final api = ApiService(token: _userLogin!.token);
+      final data = await api.getOrders();
+      return data['orders'] as List;
+    } on ApiException catch (e) {
+      if (e.statusCode == 401) await logout();
+      return [];
+    }
+  }
+
+  // ─── Profile ─────────────────────────────────────────────
+
+  Future<String?> updateProfile({
+    String? name,
+    String? currentPassword,
+    String? newPassword,
+  }) async {
+    if (_userLogin == null) return 'Chưa đăng nhập';
+    try {
+      final api = ApiService(token: _userLogin!.token);
+      final data = await api.updateProfile(
+        name: name,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      // Cập nhật user local
+      final updatedUser = UserModel.fromJson(data['user'], _userLogin!.token);
+      _userLogin = updatedUser;
+      await _saveSession(_userLogin!);
+      notifyListeners();
+      return null;
+    } on ApiException catch (e) {
+      return e.message;
     }
   }
 }

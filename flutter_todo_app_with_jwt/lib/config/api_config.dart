@@ -6,6 +6,7 @@ class ApiConfig {
   static const String login = '$baseUrl/api/auth/login';
   static const String forgotPassword = '$baseUrl/api/auth/forgot-password';
   static const String me = '$baseUrl/api/auth/me';
+  static const String updateProfile = '$baseUrl/api/auth/profile';
 
   // Categories
   static const String categories = '$baseUrl/api/categories';

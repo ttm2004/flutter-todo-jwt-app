@@ -103,4 +103,39 @@ const getMe = async (req, res) => {
   });
 };
 
-module.exports = { register, login, forgotPassword, getMe };
+// PUT /api/auth/profile
+const updateProfile = async (req, res) => {
+  try {
+    const { name, currentPassword, newPassword } = req.body;
+    const user = await User.findById(req.user._id);
+
+    if (name && name.trim()) {
+      user.name = name.trim();
+    }
+
+    if (newPassword) {
+      if (!currentPassword) {
+        return res.status(400).json({ message: 'Vui lòng nhập mật khẩu hiện tại' });
+      }
+      const isMatch = await user.comparePassword(currentPassword);
+      if (!isMatch) {
+        return res.status(400).json({ message: 'Mật khẩu hiện tại không đúng' });
+      }
+      if (newPassword.length < 6) {
+        return res.status(400).json({ message: 'Mật khẩu mới phải có ít nhất 6 ký tự' });
+      }
+      user.password = newPassword;
+    }
+
+    await user.save();
+
+    res.json({
+      message: 'Cập nhật thông tin thành công',
+      user: { id: user._id, name: user.name, email: user.email }
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Không thể cập nhật thông tin' });
+  }
+};
+
+module.exports = { register, login, forgotPassword, getMe, updateProfile };

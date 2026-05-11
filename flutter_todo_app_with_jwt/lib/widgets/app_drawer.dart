@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../store/app_store.dart';
 import '../screens/category_screen.dart';
 import '../screens/cart_screen.dart';
+import '../screens/order_history_screen.dart';
+import '../screens/profile_screen.dart';
 import '../screens/login_screen.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -101,9 +103,24 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
 
           ListTile(
+            leading: const Icon(Icons.receipt_long_outlined),
+            title: const Text('Đơn hàng của tôi'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const OrderHistoryScreen()));
+            },
+          ),
+
+          ListTile(
             leading: const Icon(Icons.person_outlined),
             title: const Text('Thông tin tài khoản'),
             subtitle: user != null ? Text(user.email, style: const TextStyle(fontSize: 12)) : null,
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ProfileScreen()));
+            },
           ),
 
           const Spacer(),

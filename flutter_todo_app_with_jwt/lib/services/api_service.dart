@@ -196,4 +196,24 @@ class ApiService {
       return _handleResponse(response);
     });
   }
+
+  Future<Map<String, dynamic>> updateProfile({
+    String? name,
+    String? currentPassword,
+    String? newPassword,
+  }) async {
+    return _withTimeout(() async {
+      final body = <String, dynamic>{};
+      if (name != null) body['name'] = name;
+      if (currentPassword != null) body['currentPassword'] = currentPassword;
+      if (newPassword != null) body['newPassword'] = newPassword;
+
+      final response = await http.put(
+        Uri.parse(ApiConfig.updateProfile),
+        headers: _headers,
+        body: jsonEncode(body),
+      );
+      return _handleResponse(response);
+    });
+  }
 }
