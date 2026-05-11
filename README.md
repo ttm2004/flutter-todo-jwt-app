@@ -2,6 +2,10 @@
 
 Ứng dụng di động Flutter kết nối với Node.js REST API server để đặt đồ ăn trực tuyến.
 
+## Demo Video
+
+[![▶ Xem Demo](https://img.shields.io/badge/▶%20Xem%20Demo-Google%20Drive-blue?style=for-the-badge&logo=google-drive)](https://drive.google.com/file/d/1SEa_En1XWEx3-WiTSs4Ao9-SIKCKcfd9/view?usp=sharing)
+
 ## Cấu Trúc Project
 
 ```
