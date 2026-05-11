@@ -1,7 +1,5 @@
 class ApiConfig {
-  // Đang chạy local - Android emulator dùng 10.0.2.2, iOS/web dùng localhost
-  // Sau khi deploy Render thì thay bằng URL thật
-  static const String baseUrl = 'http://10.0.2.2:4000';
+  static const String baseUrl = 'https://flutter-todo-jwt-app.onrender.com';
 
   // Auth
   static const String register = '$baseUrl/api/auth/register';
